@@ -1,2 +1,5 @@
 # remove if you want to preserve local data on the repo level
-pb_data/*
+pocketbase/pb_data/*
+
+# Allow tracking of the directory by not ignoring .gitkeep
+!pocketbase/pb_data/.gitkeep
