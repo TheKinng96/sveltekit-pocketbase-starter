@@ -2,6 +2,8 @@
 
 all: build up
 CONTAINER_NAME=pocketbase-container
+COMPOSE_FILE = docker-compose.dev.yml
+SVELTEKIT_SERVICE = sveltekit
 
 up:
 	@echo "Starting Docker containers..."
@@ -40,3 +42,8 @@ container:
 # SVELTEKIT
 typegen:
 	npx --prefix sveltekit pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./sveltekit/src/lib/types/pocketbase-types.ts
+
+restart-sk:
+	@echo "Restarting SvelteKit service..."
+	@docker-compose -f $(COMPOSE_FILE) stop $(SVELTEKIT_SERVICE)
+	@docker-compose -f $(COMPOSE_FILE) start $(SVELTEKIT_SERVICE)

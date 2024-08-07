@@ -1,25 +1,26 @@
 <script lang="ts">
-	import { Icons } from '$lib/icons/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { cn } from '$lib/utils.js';
+	import { Icons } from '$lib/icons/index.js'
+	import { Button } from '$lib/components/ui/button/index.js'
+	import { Input } from '$lib/components/ui/input/index.js'
+	import { Label } from '$lib/components/ui/label/index.js'
+	import { cn } from '$lib/utils.js'
+	import { enhance } from '$app/forms'
 
-	let className: string | undefined | null = undefined;
-	export { className as class };
+	let className: string | undefined | null = undefined
+	export { className as class }
 
-	let isLoading = false;
+	let isLoading = false
 	async function onSubmit() {
-		isLoading = true;
+		isLoading = true
 
 		setTimeout(() => {
-			isLoading = false;
-		}, 3000);
+			isLoading = false
+		}, 3000)
 	}
 </script>
 
 <div class={cn('grid gap-6', className)} {...$$restProps}>
-	<form on:submit|preventDefault={onSubmit}>
+	<form method="POST" use:enhance>
 		<div class="grid gap-2">
 			<div class="grid gap-1">
 				<Label class="sr-only" for="email">Email</Label>
@@ -37,7 +38,7 @@
 				{#if isLoading}
 					<Icons.spinner class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
-				Sign In with Email
+				Sign Up with Email
 			</Button>
 		</div>
 	</form>
