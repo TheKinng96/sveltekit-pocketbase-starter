@@ -36,3 +36,7 @@ backup:
 
 container:
 	@docker exec -it $(CONTAINER_NAME) /bin/sh
+
+# SVELTEKIT
+typegen:
+	npx --prefix sveltekit pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./sveltekit/src/lib/types/pocketbase-types.ts
