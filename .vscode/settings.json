@@ -1,4 +1,6 @@
 {
   "workbench.editor.labelFormat": "short",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 14
 }

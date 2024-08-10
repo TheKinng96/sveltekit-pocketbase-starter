@@ -1,61 +1,50 @@
 <script lang="ts">
-	import { Icons } from '$lib/icons/index.js'
-	import { Button } from '$lib/components/ui/button/index.js'
 	import { Input } from '$lib/components/ui/input/index.js'
-	import { Label } from '$lib/components/ui/label/index.js'
 	import { cn } from '$lib/utils.js'
-	import { enhance } from '$app/forms'
+	import * as Form from '$lib/components/ui/form'
+	import { formSchema, type FormSchema } from '../schema'
+	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms'
+	import { zodClient } from 'sveltekit-superforms/adapters'
+	import { toast } from 'svelte-sonner'
+
+	export let data: SuperValidated<Infer<FormSchema>>
+
+	const form = superForm(data, {
+		validators: zodClient(formSchema),
+	})
+
+	const { form: formData, enhance, message } = form
+
+	$: if (!!$message?.status) {
+		if ($message.status === 'success') {
+			toast.success($message.text)
+		} else {
+			toast.error($message.text)
+		}
+	}
 
 	let className: string | undefined | null = undefined
 	export { className as class }
-
-	let isLoading = false
-	async function onSubmit() {
-		isLoading = true
-
-		setTimeout(() => {
-			isLoading = false
-		}, 3000)
-	}
 </script>
 
 <div class={cn('grid gap-6', className)} {...$$restProps}>
 	<form method="POST" use:enhance>
-		<div class="grid gap-2">
-			<div class="grid gap-1">
-				<Label class="sr-only" for="email">Email</Label>
-				<Input
-					id="email"
-					placeholder="name@example.com"
-					type="email"
-					autocapitalize="none"
-					autocomplete="email"
-					autocorrect="off"
-					disabled={isLoading}
-				/>
-			</div>
-			<Button type="submit" disabled={isLoading}>
-				{#if isLoading}
-					<Icons.spinner class="mr-2 h-4 w-4 animate-spin" />
-				{/if}
-				Sign Up with Email
-			</Button>
-		</div>
+		<Form.Field {form} name="email">
+			<Form.Control let:attrs>
+				<Form.Label>Email</Form.Label>
+				<Input {...attrs} bind:value={$formData.email} />
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
+
+		<Form.Field {form} name="password">
+			<Form.Control let:attrs>
+				<Form.Label>Password</Form.Label>
+				<Input {...attrs} bind:value={$formData.password} />
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
+
+		<Form.Button>Submit</Form.Button>
 	</form>
-	<div class="relative">
-		<div class="absolute inset-0 flex items-center">
-			<span class="w-full border-t" />
-		</div>
-		<div class="relative flex justify-center text-xs uppercase">
-			<span class="bg-background text-muted-foreground px-2"> Or continue with </span>
-		</div>
-	</div>
-	<Button variant="outline" type="button" disabled={isLoading}>
-		{#if isLoading}
-			<Icons.spinner class="mr-2 h-4 w-4 animate-spin" />
-		{:else}
-			<Icons.gitHub class="mr-2 h-4 w-4" />
-		{/if}
-		GitHub
-	</Button>
 </div>

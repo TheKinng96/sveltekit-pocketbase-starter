@@ -4,16 +4,14 @@ FROM oven/bun AS builder
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json files
+# Copy package.json and bun.lockb files
 COPY package.json bun.lockb ./
 
-# Run your build process
+# Install dependencies
 RUN bun install
 
+# Copy the rest of the application source code
 COPY . .
 
 # Expose the port the application will run on
 EXPOSE 8080
-
-#Start the BUN server
-CMD ["bun", "run", "dev", "--host"]
