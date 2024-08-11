@@ -34,7 +34,7 @@ export const actions = {
 		} catch (error) {
 			const err = error as { response: ErrorResponse<FormSchema> }
 
-			return message(form, { text: err.response.message, status: 'success' })
+			return message(form, { text: err.response.message, status: 'error' })
 		}
 
 		return message(form, { text: 'created successfully!', status: 'success' })
