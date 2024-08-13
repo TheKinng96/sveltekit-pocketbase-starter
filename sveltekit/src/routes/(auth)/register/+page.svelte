@@ -31,7 +31,7 @@
 		<div class="relative z-20 mt-auto">
 			<blockquote class="space-y-2">
 				<p class="text-lg">
-					{m.auth_quote_content()}
+					{@html m.auth_quote_content()}
 				</p>
 				<footer class="text-sm">{m.auth_quote_author()}</footer>
 			</blockquote>

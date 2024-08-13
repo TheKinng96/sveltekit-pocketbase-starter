@@ -1,4 +1,18 @@
 {
     "$schema": "https://inlang.com/schema/inlang-message-format",
+    "button_login": "サインイン",
+    "button_register": "サインアップ",
+    "button_logout": "ログアウト",
+    "homepage_title": "",
+    "auth_quote_content": "「このライブラリのおかげで、数え切れないほどの作業時間を節約でき、これまでにない速さで素晴らしいデザインをクライアントに提供できるようになりました。強くお勧めします!」",
+    "auth_quote_author": "ソフィア・デイビス",
+    "auth_register_title": "登録",
+    "auth_register_formTitle": "アカウントを作成する",
+    "auth_register_formDescription": "アカウントを作成するには、以下のメールアドレスを入力してください",
+    "auth_register_termsAndConditions": "続行をクリックすると、当社の<br/>{termsLink}および{privacyLink} 。",
+    "auth_register_termsOfService": "利用規約",
+    "auth_register_privacyPolicy": "プライバシーポリシー",
+    "auth_login_title": "ログイン",
+    "auth_registration_description": "登録の説明",
     "test": "モカテスト"
 }
