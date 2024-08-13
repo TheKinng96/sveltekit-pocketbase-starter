@@ -26,7 +26,7 @@ services:
       - ./sveltekit/static:/app/static
       - ./sveltekit/vite.config.ts:/app/vite.config.ts
       - ./sveltekit/tsconfig.json:/app/tsconfig.json
-      - ./sveltekit/svelte.config.ts:/app/svelte.config.ts
+      - ./sveltekit/svelte.config.js:/app/svelte.config.js
     networks:
       - my-network
     command: bun run dev --host

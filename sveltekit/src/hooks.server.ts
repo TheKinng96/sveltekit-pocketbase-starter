@@ -1,8 +1,10 @@
+import { i18n } from '$lib/i18n'
+import { sequence } from '@sveltejs/kit/hooks'
 import Pocketbase from 'pocketbase'
 import type { Handle } from '@sveltejs/kit'
 import type { AuthSystemFields, TypedPocketBase } from '$lib/types/pocketbase-types'
 
-export const handle: Handle = async ({ event, resolve }) => {
+const handlePocketbase: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new Pocketbase('http://pocketbase:8090') as TypedPocketBase
 
 	// Remove this line if you want to stop multiple request calling at the same time
@@ -22,3 +24,5 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	return response
 }
+
+export const handle = sequence(i18n.handle(), handlePocketbase)
