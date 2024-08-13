@@ -1,8 +1,22 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 
-	"test": "mocha test",
-	"auth_registration_title": "Registration",
+	"button_login": "Sign in",
+	"button_register": "Sign up",
+	"button_logout": "Log out",
+
+	"homepage_title": "",
+
+	"auth_quote_content": "&ldquo;This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before. Highly recommended!&rdquo;",
+	"auth_quote_author": "Sofia Davis",
+
+	"auth_register_title": "Registration",
+	"auth_register_formTitle": "Create an account",
+	"auth_register_formDescription": "Enter your email below to create your account",
+	"auth_register_termsAndConditions": "By clicking continue, you agree to our <br/> {termsLink} and {privacyLink}.",
+	"auth_register_termsOfService": "Term of Service",
+	"auth_register_privacyPolicy": "Privacy Policy",
+
 	"auth_login_title": "Login",
 	"auth_registration_description": "Registration description"
 }

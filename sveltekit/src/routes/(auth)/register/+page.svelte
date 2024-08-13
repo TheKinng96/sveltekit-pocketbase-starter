@@ -4,6 +4,7 @@
 	import AuthenticationLight from '$lib/img/auth/authentication-light.png'
 	import AuthenticationDark from '$lib/img/auth/authentication-dark.png'
 	import type { PageData } from './$types'
+	import * as m from '$lib/paraglide/messages.js'
 
 	export let data: PageData
 </script>
@@ -16,7 +17,7 @@
 	class="container relative hidden min-h-[100vh] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
 >
 	<Button href="/login" variant="outline" class="absolute right-4 top-4 md:right-8 md:top-8">
-		Login
+		{m.button_login()}
 	</Button>
 
 	<div class="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
@@ -30,32 +31,26 @@
 		<div class="relative z-20 mt-auto">
 			<blockquote class="space-y-2">
 				<p class="text-lg">
-					&ldquo;This library has saved me countless hours of work and helped me deliver stunning
-					designs to my clients faster than ever before. Highly recommended!&rdquo;
+					{m.auth_quote_content()}
 				</p>
-				<footer class="text-sm">Sofia Davis</footer>
+				<footer class="text-sm">{m.auth_quote_author()}</footer>
 			</blockquote>
 		</div>
 	</div>
 	<div class="lg:p-8">
 		<div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
 			<div class="flex flex-col space-y-2 text-center">
-				<h1 class="text-2xl font-semibold tracking-tight">Create an account</h1>
-				<p class="text-muted-foreground text-sm">Enter your email below to create your account</p>
+				<h1 class="text-2xl font-semibold tracking-tight">{m.auth_register_formTitle()}</h1>
+				<p class="text-muted-foreground text-sm">{m.auth_register_formDescription()}</p>
 			</div>
 
 			<UserAuthForm data={data.form} />
 
 			<p class="text-muted-foreground px-8 text-center text-sm">
-				By clicking continue, you agree to our
-				<a href="/terms" class="hover:text-primary underline underline-offset-4">
-					Terms of Service
-				</a>
-				and
-				<a href="/privacy" class="hover:text-primary underline underline-offset-4">
-					Privacy Policy
-				</a>
-				.
+				{@html m.auth_register_termsAndConditions({
+					termsLink: `<a href="/terms" class="hover:text-primary underline underline-offset-4">${m.auth_register_termsOfService()}</a>`,
+					privacyLink: `<a href="/privacy" class="hover:text-primary underline underline-offset-4">${m.auth_register_privacyPolicy()}</a>`,
+				})}
 			</p>
 		</div>
 	</div>
