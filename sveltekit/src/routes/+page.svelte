@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js'
 	import { Icons } from '$lib/icons'
-	import Twitter from '$lib/icons/twitter.svelte'
 
 	const team1 = 'images/team-1-800x800.jpg'
 	const team2 = 'images/team-2-800x800.jpg'
@@ -54,7 +53,7 @@
 		</div>
 	</div>
 
-	<section class="-mt-24 bg-zinc-200 pb-20">
+	<section class="-mt-24 bg-zinc-200 pb-20" id="awards">
 		<div class="container mx-auto px-4">
 			<div class="flex flex-wrap">
 				<div class="w-full px-4 pt-6 text-center md:w-4/12 lg:pt-12">
@@ -165,7 +164,7 @@
 		</div>
 	</section>
 
-	<section class="relative py-20">
+	<section class="relative py-20" id="about">
 		<div
 			class="pointer-events-none absolute bottom-auto left-0 right-0 top-[1px] -mt-20 h-20 w-full overflow-hidden"
 			style="transform: translateZ(0);"
