@@ -13,5 +13,6 @@
 <ParaglideJS {i18n}>
 	<Toaster richColors />
 	<AppNavbar {data} />
+
 	<slot />
 </ParaglideJS>

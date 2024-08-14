@@ -3,6 +3,8 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { Button } from '$lib/components/ui/button'
 	import * as Avatar from '$lib/components/ui/avatar'
+	import { page } from '$app/stores'
+	import { LogIn, UserRoundPlus } from 'lucide-svelte'
 
 	export let data: { user: AuthSystemFields | undefined }
 
@@ -54,7 +56,7 @@
 			{/each}
 		</div>
 
-		<!-- Profile -->
+		<!-- Profile / login signup -->
 		{#if data.user}
 			<Avatar.Root>
 				<Avatar.Image
@@ -63,6 +65,16 @@
 				/>
 				<Avatar.Fallback>CN</Avatar.Fallback>
 			</Avatar.Root>
+		{:else if $page.url.pathname === '/register'}
+			<Button variant="ghost" href="/login" class="flex gap-2">
+				<LogIn size="18" />
+				{m.button_login()}
+			</Button>
+		{:else}
+			<Button variant="ghost" href="/register" class="flex gap-2">
+				<UserRoundPlus size="18" />
+				{m.button_register()}
+			</Button>
 		{/if}
 	</div>
 </div>

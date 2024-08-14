@@ -3,6 +3,9 @@
 	"button_login": "Sign in",
 	"button_register": "Sign up",
 	"button_logout": "Log out",
+	"button_submit": "Submit",
+	"form_emailLabel": "Email",
+	"form_passwordLabel": "Password",
 	"homepage_head": "Welcome to ACME",
 	"nav_awards": "Awards",
 	"nav_about": "About",
@@ -15,6 +18,6 @@
 	"auth_register_termsAndConditions": "By clicking continue, you agree to our <br/> {termsLink} and {privacyLink}.",
 	"auth_register_termsOfService": "Term of Service",
 	"auth_register_privacyPolicy": "Privacy Policy",
-	"auth_login_title": "Login",
+	"auth_login_formTitle": "Login",
 	"auth_registration_description": "Registration description"
 }
