@@ -4,6 +4,7 @@
     "button_register": "サインアップ",
     "button_logout": "ログアウト",
     "button_submit": "提出する",
+    "button_passwordHover": "パスワードフィールドを表示または非表示にする",
     "form_emailLabel": "メール",
     "form_passwordLabel": "パスワード",
     "form_passwordConfirmLabel": "パスワードの確認",
