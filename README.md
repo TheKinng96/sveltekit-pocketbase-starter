@@ -9,6 +9,13 @@ This is a starter template using docker to host sveltekit and pocketbase
 `make up` to start the container
 `make down` to stop the container
 
+Ports
+
+```
+sveltekit - 8080
+pocketbase - 8090
+```
+
 # pocketbase
 
 - [documentation](https://pocketbase.io/)
