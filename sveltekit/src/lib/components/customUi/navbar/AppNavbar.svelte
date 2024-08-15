@@ -2,9 +2,9 @@
 	import type { AuthSystemFields } from '$lib/types/pocketbase-types'
 	import * as m from '$lib/paraglide/messages.js'
 	import { Button } from '$lib/components/ui/button'
-	import * as Avatar from '$lib/components/ui/avatar'
 	import { page } from '$app/stores'
 	import { LogIn, UserRoundPlus } from 'lucide-svelte'
+	import UserNav from './components/UserNav.svelte'
 
 	export let data: { user: AuthSystemFields | undefined }
 
@@ -58,13 +58,7 @@
 
 		<!-- Profile / login signup -->
 		{#if data.user}
-			<Avatar.Root>
-				<Avatar.Image
-					src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${data.user.username}`}
-					alt={`${data.user.username}'s avatar`}
-				/>
-				<Avatar.Fallback>CN</Avatar.Fallback>
-			</Avatar.Root>
+			<UserNav user={data.user} />
 		{:else if $page.url.pathname === '/register'}
 			<Button variant="ghost" href="/login" class="flex gap-2">
 				<LogIn size="18" />

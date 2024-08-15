@@ -10,6 +10,7 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { LogIn } from 'lucide-svelte'
 	import AppPasswordInput from '$lib/components/customUi/password/AppPasswordInput.svelte'
+	import { goto } from '$app/navigation'
 
 	export let data: PageData
 
@@ -19,11 +20,15 @@
 
 	const { form: formData, enhance, message } = form
 
-	$: if (!!$message?.status && $message.text) {
-		if ($message.status !== 'success') {
+	$: if (!!$message?.status) {
+		if ($message.status !== 'success' && $message.text) {
 			toast.error($message.text.title, {
 				description: $message.text.description,
 			})
+		}
+
+		if ($message.status === 'success') {
+			goto('/dashboard')
 		}
 	}
 

@@ -4,6 +4,7 @@ import { zod } from 'sveltekit-superforms/adapters'
 import { formSchema } from './schema'
 import type { Message } from '$lib/types/response.types'
 import * as m from '$lib/paraglide/messages.js'
+import { redirect } from '@sveltejs/kit'
 
 export const load = async () => {
 	const form = await superValidate<Infer<typeof formSchema>, Message>(zod(formSchema))

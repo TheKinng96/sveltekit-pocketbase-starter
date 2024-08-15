@@ -10,6 +10,7 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { UserRoundPlus } from 'lucide-svelte'
 	import { AppPasswordInput } from '$lib/components/customUi/password'
+	import { goto } from '$app/navigation'
 
 	export let data: PageData
 
@@ -22,6 +23,7 @@
 	$: if (!!$message?.status && $message.text) {
 		if ($message.status === 'success') {
 			toast.success($message.text.title)
+			goto('/dashboard')
 		} else {
 			toast.error($message.text.title, {
 				description: $message.text.description,
