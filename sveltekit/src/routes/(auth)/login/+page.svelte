@@ -9,6 +9,7 @@
 	import type { PageData } from './$types'
 	import * as m from '$lib/paraglide/messages.js'
 	import { LogIn } from 'lucide-svelte'
+	import AppPasswordInput from '$lib/components/customUi/password/AppPasswordInput.svelte'
 
 	export let data: PageData
 
@@ -48,7 +49,7 @@
 		<Form.Field {form} name="password">
 			<Form.Control let:attrs>
 				<Form.Label>{m.form_passwordLabel()}</Form.Label>
-				<Input type="password" {...attrs} bind:value={$formData.password} />
+				<AppPasswordInput {...attrs} bind:value={$formData.password} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>

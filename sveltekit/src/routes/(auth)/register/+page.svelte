@@ -9,6 +9,7 @@
 	import type { PageData } from './$types'
 	import * as m from '$lib/paraglide/messages.js'
 	import { UserRoundPlus } from 'lucide-svelte'
+	import { AppPasswordInput } from '$lib/components/customUi/password'
 
 	export let data: PageData
 
@@ -50,7 +51,7 @@
 		<Form.Field {form} name="password">
 			<Form.Control let:attrs>
 				<Form.Label>{m.form_passwordLabel()}</Form.Label>
-				<Input {...attrs} type="password" bind:value={$formData.password} />
+				<AppPasswordInput {...attrs} bind:value={$formData.password} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
@@ -58,7 +59,7 @@
 		<Form.Field {form} name="passwordConfirm">
 			<Form.Control let:attrs>
 				<Form.Label>{m.form_passwordConfirmLabel()}</Form.Label>
-				<Input {...attrs} type="password" bind:value={$formData.passwordConfirm} />
+				<AppPasswordInput {...attrs} bind:value={$formData.passwordConfirm} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>

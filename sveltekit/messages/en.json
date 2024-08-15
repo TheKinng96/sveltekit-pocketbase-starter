@@ -4,6 +4,7 @@
 	"button_register": "Sign up",
 	"button_logout": "Log out",
 	"button_submit": "Submit",
+	"button_passwordHover": "Show or hide the password field",
 	"form_emailLabel": "Email",
 	"form_passwordLabel": "Password",
 	"form_passwordConfirmLabel": "Password confirmation",

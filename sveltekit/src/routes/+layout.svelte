@@ -4,7 +4,7 @@
 
 	import '../app.pcss'
 	import { Toaster } from '$lib/components/ui/sonner'
-	import { AppNavbar } from '$lib/components/navbar'
+	import { AppNavbar } from '$lib/components/customUi/navbar'
 	import type { PageData } from './$types'
 
 	export let data: PageData
