@@ -1,8 +1,9 @@
 import type { Actions } from './$types'
 import { fail, message, superValidate, type Infer } from 'sveltekit-superforms'
 import { zod } from 'sveltekit-superforms/adapters'
-import { formSchema, type FormSchema } from './schema'
-import type { ErrorResponse, Message } from '$lib/types/response.types'
+import { formSchema } from './schema'
+import type { Message } from '$lib/types/response.types'
+import * as m from '$lib/paraglide/messages.js'
 
 export const load = async () => {
 	const form = await superValidate<Infer<typeof formSchema>, Message>(zod(formSchema))
@@ -23,11 +24,17 @@ export const actions = {
 		try {
 			await locals.pb.collection('users').authWithPassword(email, password)
 		} catch (error) {
-			const err = error as { response: ErrorResponse<FormSchema> }
-
-			return message(form, { text: err.response.message, status: 'error' })
+			return message(form, {
+				text: {
+					title: m.error_failedToLogin(),
+					description: m.error_failedToLoginDescription(),
+				},
+				status: 'error',
+			})
 		}
 
-		return message(form, { text: 'Login!', status: 'success' })
+		return message(form, {
+			status: 'success',
+		})
 	},
 } satisfies Actions

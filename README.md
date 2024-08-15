@@ -12,4 +12,9 @@ This is a starter template using docker to host sveltekit and pocketbase
 
 # sveltekit
 
+- Packages included
+  1. [shadcn-svelte](https://www.shadcn-svelte.com/)
+  2. []()
+- Known issues
+  - When adding new packages, need to restart `make down` and `make up` to refresh the container
 - WIP

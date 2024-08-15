@@ -3,10 +3,21 @@ export interface ValidationError {
 	message: string
 }
 
-export interface ErrorResponse<T> {
+export interface ErrorResponse<T extends Record<string, ErrorDetail>> {
 	code: number
 	message: string
 	data: T
 }
 
-export type Message = { status: 'error' | 'success'; text: string }
+export interface ErrorDetail {
+	code: string
+	message: string
+}
+
+export type Message = {
+	status: 'error' | 'success'
+	text?: {
+		title: string
+		description?: string
+	}
+}

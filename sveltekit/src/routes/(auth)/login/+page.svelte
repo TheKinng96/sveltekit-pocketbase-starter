@@ -18,11 +18,11 @@
 
 	const { form: formData, enhance, message } = form
 
-	$: if (!!$message?.status) {
-		if ($message.status === 'success') {
-			toast.success($message.text)
-		} else {
-			toast.error($message.text)
+	$: if (!!$message?.status && $message.text) {
+		if ($message.status !== 'success') {
+			toast.error($message.text.title, {
+				description: $message.text.description,
+			})
 		}
 	}
 
@@ -32,6 +32,7 @@
 
 <div class="flex flex-col space-y-2 text-center">
 	<h1 class="text-2xl font-semibold tracking-tight">{m.auth_login_formTitle()}</h1>
+	<p class="text-muted-foreground text-sm">{m.auth_login_formDescription()}</p>
 </div>
 
 <div class={cn('grid gap-6', className)} {...$$restProps}>
@@ -47,7 +48,7 @@
 		<Form.Field {form} name="password">
 			<Form.Control let:attrs>
 				<Form.Label>{m.form_passwordLabel()}</Form.Label>
-				<Input {...attrs} bind:value={$formData.password} />
+				<Input type="password" {...attrs} bind:value={$formData.password} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>

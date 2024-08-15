@@ -1,8 +1,9 @@
 import type { Actions } from './$types'
 import { fail, message, superValidate, type Infer } from 'sveltekit-superforms'
 import { zod } from 'sveltekit-superforms/adapters'
-import { formSchema, type FormSchema } from './schema'
-import type { ErrorResponse, Message } from '$lib/types/response.types'
+import { formSchema, type RegisterErrorKeys, type RegisterFormError } from './schema'
+import type { ErrorDetail, ErrorResponse, Message } from '$lib/types/response.types'
+import * as m from '$lib/paraglide/messages.js'
 
 export const load = async () => {
 	const form = await superValidate<Infer<typeof formSchema>, Message>(zod(formSchema))
@@ -32,11 +33,31 @@ export const actions = {
 		try {
 			await locals.pb.collection('users').create(data)
 		} catch (error) {
-			const err = error as { response: ErrorResponse<FormSchema> }
+			const err = error as {
+				response: ErrorResponse<RegisterFormError>
+			}
 
-			return message(form, { text: err.response.message, status: 'error' })
+			let errorCode: RegisterErrorKeys = err.response.data?.email?.code as RegisterErrorKeys
+
+			// To parse the error message from pocketbase to locales
+			const errors = {
+				validation_invalid_email: m.error_validationInvalidEmail(),
+			} as Record<NonNullable<RegisterErrorKeys>, string>
+
+			return message(form, {
+				text: {
+					title: err.response.message,
+					description: errorCode ? errors[errorCode] : undefined,
+				},
+				status: 'error',
+			})
 		}
 
-		return message(form, { text: 'created successfully!', status: 'success' })
+		return message(form, {
+			text: {
+				title: m.success_createAccount(),
+			},
+			status: 'success',
+		})
 	},
 } satisfies Actions

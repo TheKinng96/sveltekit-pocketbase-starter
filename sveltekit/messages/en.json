@@ -6,6 +6,7 @@
 	"button_submit": "Submit",
 	"form_emailLabel": "Email",
 	"form_passwordLabel": "Password",
+	"form_passwordConfirmLabel": "Password confirmation",
 	"homepage_head": "Welcome to ACME",
 	"nav_awards": "Awards",
 	"nav_about": "About",
@@ -19,5 +20,13 @@
 	"auth_register_termsOfService": "Term of Service",
 	"auth_register_privacyPolicy": "Privacy Policy",
 	"auth_login_formTitle": "Login",
-	"auth_registration_description": "Registration description"
+	"auth_login_formDescription": "Good to see you back!",
+	"auth_registration_description": "Registration description",
+	"validation_passwordConfirm": "The passwords did not match",
+	"success_createAccount": "Your account was created",
+	"success_message": "OK",
+	"error_failedToCreateAccount": "Failed to create an account",
+	"error_failedToLogin": "Login Failed",
+	"error_failedToLoginDescription": "Incorrect email or password. Please check your credentials and try again",
+	"error_validationInvalidEmail": "The email is invalid or already in use"
 }
