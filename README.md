@@ -1,3 +1,9 @@
+If you like this starter template or this starter template helps you, feel free to contribute and make it a better starter template ever.
+
+If you want to [buy me a coffee](buymeacoffee.com/fengyuanyaE), I would appreciate that.
+
+---
+
 This is a starter template using docker to host sveltekit and pocketbase
 
 `make up` to start the container
