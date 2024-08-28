@@ -38,14 +38,19 @@ routerAdd(
       });
     }
 
+    const {
+      id: colormeId,
+      login_id,
+      name1,
+      user_mail,
+      shop_mail_1,
+      url,
+      shop_logo_url,
+    } = colormeShopData;
+
     const userCollection = $app.dao().findCollectionByNameOrId("users");
-
     const userRecord = new Record(userCollection);
-
     const userForm = new RecordUpsertForm($app, userRecord);
-
-    const { id, login_id, name1, user_mail, shop_mail_1, url, shop_logo_url } =
-      colormeShopData;
 
     userForm.loadData({
       username: name1,
@@ -57,59 +62,40 @@ routerAdd(
     });
 
     userForm.submit();
-    return c.json(200, { user: userRecord });
 
-    // // create shop
-    // const shopData = new DynamicModel({
-    //   userId: id,
-    //   login_id,
-    //   name: name1,
-    //   email: shop_mail_1,
-    //   url,
-    //   logoUrl: shop_logo_url,
-    //   makeDate,
-    // });
+    const shopCollection = $app.dao().findCollectionByNameOrId("shops");
+    const shopRecord = new Record(shopCollection);
+    const shopForm = new RecordUpsertForm($app, shopRecord);
 
-    // save user
-    // userData.save();
-    // shopData.save();
+    shopForm.loadData({
+      userId: userRecord.id,
+      shopEmail: shop_mail_1,
+      shopLogoUrl: shop_logo_url,
+      url: url,
+    });
 
-    // generate access token
-    // const token = generateAccessToken(userData.id);
+    shopForm.submit();
 
-    // update user's access token
-    // userData.set("accessToken", token);
-    // userData.save();
+    const authProviderCollection = $app
+      .dao()
+      .findCollectionByNameOrId("authProviders");
+    const authProviderRecord = new Record(authProviderCollection);
+    const authProviderForm = new RecordUpsertForm($app, authProviderRecord);
 
-    // save user's access token in the session
-    // $app.session().set("accessToken", token);
+    authProviderForm.loadData({
+      userId: userRecord.id,
+      provider: "colorme",
+      providerId: colormeId,
+      accessToken,
+    });
 
-    // // Add more fields if needed
-    // // data.phone =...;
-    // // data.password =...;
-    // // data.save();
+    authProviderForm.submit();
 
-    // // Add more fields if needed
-    // // data.phone =...;
-    // // data.password =...;
-    // // data.save();
-
-    // // Add more fields if needed
-    //
-
-    // Setup data structure
-    // const data = new DynamicModel({
-    //   phone: "",
-    //   password: "",
-    // });
-    // c.bind(data);
-    // const record = $app
-    //   .dao()
-    //   .findFirstRecordByData("users", "phone", data.phone);
-    // if (!record.validatePassword(data.password)) {
-    //   throw new BadRequestError("invalid credentials");
-    // }
-    return c.json(200, { message: "Hello " + data.accessToken });
+    return c.json(200, {
+      user: userRecord,
+      shop: shopRecord,
+      authProvider: authProviderRecord,
+    });
   },
   $apis.activityLogger($app)
 );
