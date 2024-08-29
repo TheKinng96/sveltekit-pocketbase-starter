@@ -40,7 +40,6 @@ routerAdd(
 
     const {
       id: colormeId,
-      login_id,
       name1,
       user_mail,
       shop_mail_1,
@@ -48,53 +47,59 @@ routerAdd(
       shop_logo_url,
     } = colormeShopData;
 
-    const userCollection = $app.dao().findCollectionByNameOrId("users");
-    const userRecord = new Record(userCollection);
-    const userForm = new RecordUpsertForm($app, userRecord);
-
-    userForm.loadData({
-      username: name1,
-      email: user_mail,
-      emailVisibility: true,
-      password,
-      passwordConfirm: password,
-      lastLogin: new Date(),
-    });
-
-    userForm.submit();
-
-    const shopCollection = $app.dao().findCollectionByNameOrId("shops");
-    const shopRecord = new Record(shopCollection);
-    const shopForm = new RecordUpsertForm($app, shopRecord);
-
-    shopForm.loadData({
-      userId: userRecord.id,
-      shopEmail: shop_mail_1,
-      shopLogoUrl: shop_logo_url,
-      url: url,
-    });
-
-    shopForm.submit();
-
-    const authProviderCollection = $app
+    const authProvider = $app
       .dao()
-      .findCollectionByNameOrId("authProviders");
-    const authProviderRecord = new Record(authProviderCollection);
-    const authProviderForm = new RecordUpsertForm($app, authProviderRecord);
+      .findFirstRecordByData("authProviders", "providerId", colormeId);
 
-    authProviderForm.loadData({
-      userId: userRecord.id,
-      provider: "colorme",
-      providerId: colormeId,
-      accessToken,
-    });
+    // create new user
+    if (!authProvider) {
+      const userCollection = $app.dao().findCollectionByNameOrId("users");
+      const userRecord = new Record(userCollection);
+      const userForm = new RecordUpsertForm($app, userRecord);
 
-    authProviderForm.submit();
+      userForm.loadData({
+        username: name1,
+        email: user_mail,
+        emailVisibility: true,
+        password,
+        passwordConfirm: password,
+        lastLogin: new Date(),
+      });
+
+      userForm.submit();
+
+      const shopCollection = $app.dao().findCollectionByNameOrId("shops");
+      const shopRecord = new Record(shopCollection);
+      const shopForm = new RecordUpsertForm($app, shopRecord);
+
+      shopForm.loadData({
+        userId: userRecord.id,
+        shopEmail: shop_mail_1,
+        shopLogoUrl: shop_logo_url,
+        url: url,
+      });
+
+      shopForm.submit();
+
+      const authProviderCollection = $app
+        .dao()
+        .findCollectionByNameOrId("authProviders");
+      const authProviderRecord = new Record(authProviderCollection);
+      const authProviderForm = new RecordUpsertForm($app, authProviderRecord);
+
+      authProviderForm.loadData({
+        userId: userRecord.id,
+        provider: "colorme",
+        providerId: colormeId,
+        accessToken,
+      });
+
+      authProviderForm.submit();
+    }
 
     return c.json(200, {
-      user: userRecord,
-      shop: shopRecord,
-      authProvider: authProviderRecord,
+      authProvider,
+      success: true,
     });
   },
   $apis.activityLogger($app)
