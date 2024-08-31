@@ -99,7 +99,6 @@ routerAdd(
 
     return c.json(200, {
       authProvider,
-      success: true,
     });
   },
   $apis.activityLogger($app)
