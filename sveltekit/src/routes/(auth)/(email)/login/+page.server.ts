@@ -4,12 +4,19 @@ import { zod } from 'sveltekit-superforms/adapters'
 import { formSchema } from './schema'
 import type { Message } from '$lib/types/response.types'
 import * as m from '$lib/paraglide/messages.js'
-import { redirect } from '@sveltejs/kit'
+import { ColormeTokenRequest } from '$lib/server/Colorme.api'
+import { COLORME_CLIENT, COLORME_REDIRECT_URL } from '$env/static/private'
 
 export const load = async () => {
 	const form = await superValidate<Infer<typeof formSchema>, Message>(zod(formSchema))
 
-	return { form }
+	return {
+		form,
+		colormeLoginUrl: await new ColormeTokenRequest(
+			COLORME_CLIENT,
+			COLORME_REDIRECT_URL,
+		).getAuthUrl(),
+	}
 }
 
 export const actions = {

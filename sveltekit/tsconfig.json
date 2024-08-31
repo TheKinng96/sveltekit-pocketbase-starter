@@ -16,6 +16,6 @@
 		"allowSyntheticDefaultImports": true,
 		"noEmit": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", ".svelte-kit/ambient.d.ts"],
 	"exclude": ["node_modules"]
 }

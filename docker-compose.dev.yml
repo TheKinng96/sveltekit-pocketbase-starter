@@ -29,6 +29,7 @@ services:
       - ./sveltekit/svelte.config.js:/app/svelte.config.js
       - ./sveltekit/messages:/app/messages
       - ./sveltekit/project.inlang:/app/project.inlang
+      - ./sveltekit/.svelte-kit:/app/.svelte-kit
     networks:
       - my-network
     command: bun run dev --host

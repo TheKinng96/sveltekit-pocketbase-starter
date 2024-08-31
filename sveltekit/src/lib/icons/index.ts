@@ -37,6 +37,7 @@ import RadixSvelte from './radix-svelte.svelte'
 import Tailwind from './tailwind.svelte'
 import Twitter from './twitter.svelte'
 import Yarn from './yarn.svelte'
+import Colorme from './colorme.svelte'
 
 export type Icon = SvelteComponent
 
@@ -79,4 +80,5 @@ export const Icons = {
 	paypal: PayPal,
 	Hamburger,
 	login: LogIn,
+	colorme: Colorme,
 }

@@ -8,6 +8,8 @@
 	"form_emailLabel": "Email",
 	"form_passwordLabel": "Password",
 	"form_passwordConfirmLabel": "Password confirmation",
+	"callback_default": "Please wait...",
+	"callback_error": "Login failed, redirecting to homepage...",
 	"homepage_head": "Welcome to ACME",
 	"nav_awards": "Awards",
 	"nav_about": "About",
@@ -28,6 +30,7 @@
 	"success_message": "OK",
 	"error_failedToCreateAccount": "Failed to create an account",
 	"error_failedToLogin": "Login Failed",
+	"error_unauthorized": "Unauthorized",
 	"error_failedToLoginDescription": "Incorrect email or password. Please check your credentials and try again",
 	"error_validationInvalidEmail": "The email is invalid or already in use"
 }
