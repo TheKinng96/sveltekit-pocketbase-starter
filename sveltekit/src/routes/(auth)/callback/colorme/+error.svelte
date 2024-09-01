@@ -5,7 +5,7 @@
 
 	onMount(() => {
 		setTimeout(() => {
-			goto('/')
+			goto('/login')
 		}, 2000)
 	})
 </script>
