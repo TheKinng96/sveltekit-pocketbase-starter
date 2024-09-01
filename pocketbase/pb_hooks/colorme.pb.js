@@ -4,12 +4,11 @@
  * @property {string} password - Random generated password
  * @property {Object} colormeShopData
  * @property {string} colormeShopData.id
- * @property {string} colormeShopData.login_id
- * @property {string} colormeShopData.name1
- * @property {string} colormeShopData.user_mail
- * @property {string} colormeShopData.shop_mail_1
+ * @property {string} colormeShopData.name
+ * @property {string} colormeShopData.email
+ * @property {string} colormeShopData.shopMail
  * @property {string} colormeShopData.url
- * @property {string} colormeShopData.shop_logo_url
+ * @property {string} colormeShopData.shopLogoUrl
  */
 
 routerAdd(
@@ -40,11 +39,11 @@ routerAdd(
 
     const {
       id: colormeId,
-      name1,
-      user_mail,
-      shop_mail_1,
+      name,
+      email,
+      shopMail,
       url,
-      shop_logo_url,
+      shopLogoUrl,
     } = colormeShopData;
 
     const createNewUser = () => {
@@ -53,8 +52,8 @@ routerAdd(
       const userForm = new RecordUpsertForm($app, userRecord);
 
       userForm.loadData({
-        username: name1,
-        email: user_mail,
+        username: name,
+        email,
         emailVisibility: true,
         password,
         passwordConfirm: password,
@@ -69,8 +68,8 @@ routerAdd(
 
       shopForm.loadData({
         userId: userRecord.id,
-        shopEmail: shop_mail_1,
-        shopLogoUrl: shop_logo_url,
+        shopEmail: shopMail,
+        shopLogoUrl: shopLogoUrl,
         url: url,
       });
 
