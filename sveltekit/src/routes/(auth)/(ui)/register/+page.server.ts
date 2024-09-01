@@ -2,7 +2,7 @@ import type { Actions } from './$types'
 import { fail, message, superValidate, type Infer } from 'sveltekit-superforms'
 import { zod } from 'sveltekit-superforms/adapters'
 import { formSchema, type RegisterErrorKeys, type RegisterFormError } from './schema'
-import type { ErrorDetail, ErrorResponse, Message } from '$lib/types/response.types'
+import type { ErrorResponse, Message } from '$lib/types/response.types'
 import * as m from '$lib/paraglide/messages.js'
 
 export const load = async () => {

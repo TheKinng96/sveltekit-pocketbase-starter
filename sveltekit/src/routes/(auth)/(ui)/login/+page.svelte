@@ -11,6 +11,8 @@
 	import { LogIn } from 'lucide-svelte'
 	import AppPasswordInput from '$lib/components/customUi/password/AppPasswordInput.svelte'
 	import { goto } from '$app/navigation'
+	import Button from '@/components/ui/button/button.svelte'
+	import { Icons } from '@/icons'
 
 	export let data: PageData
 
@@ -59,9 +61,23 @@
 			<Form.FieldErrors />
 		</Form.Field>
 
-		<Form.Button class="mt-4 flex gap-4">
+		<Form.Button class="mt-4 flex w-full gap-4">
 			<LogIn size="18" />
 			{m.button_login()}
 		</Form.Button>
 	</form>
+
+	<div class="relative">
+		<div class="absolute inset-0 flex items-center">
+			<span class="w-full border-t" />
+		</div>
+		<div class="relative flex justify-center text-xs uppercase">
+			<span class="bg-background text-muted-foreground px-2"> Or continue with </span>
+		</div>
+	</div>
+
+	<Button variant="outline" href={data.colormeUrl} class="flex gap-2">
+		<Icons.colorme class="h-full scale-90" />
+		ColorMe
+	</Button>
 </div>
