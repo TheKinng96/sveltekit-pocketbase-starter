@@ -41,6 +41,6 @@ export const load: PageServerLoad = async function ({ url, locals }) {
 		throw error(420, 'User creation failed')
 	}
 
-	await locals.pb.collection('users').authWithPassword('user@test.com', password)
+	await locals.pb.collection('users').authWithPassword(colormeShopData.email, password)
 	redirect(303, '/dashboard')
 }
