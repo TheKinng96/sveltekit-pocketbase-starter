@@ -38,6 +38,7 @@ import Tailwind from './tailwind.svelte'
 import Twitter from './twitter.svelte'
 import Yarn from './yarn.svelte'
 import Colorme from './colorme.svelte'
+import ColormeFull from './colormeFull.svelte'
 
 export type Icon = SvelteComponent
 
@@ -81,4 +82,5 @@ export const Icons = {
 	Hamburger,
 	login: LogIn,
 	colorme: Colorme,
+	colormeFull: ColormeFull,
 }
