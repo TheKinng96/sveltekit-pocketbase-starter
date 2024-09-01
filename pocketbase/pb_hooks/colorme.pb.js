@@ -47,12 +47,7 @@ routerAdd(
       shop_logo_url,
     } = colormeShopData;
 
-    const authProvider = $app
-      .dao()
-      .findFirstRecordByData("authProviders", "providerId", colormeId);
-
-    // create new user
-    if (!authProvider) {
+    const createNewUser = () => {
       const userCollection = $app.dao().findCollectionByNameOrId("users");
       const userRecord = new Record(userCollection);
       const userForm = new RecordUpsertForm($app, userRecord);
@@ -95,6 +90,17 @@ routerAdd(
       });
 
       authProviderForm.submit();
+
+      return authProviderRecord;
+    };
+
+    let authProvider = null;
+    try {
+      authProvider = $app
+        .dao()
+        .findFirstRecordByData("authProviders", "providerId", colormeId);
+    } catch (e) {
+      authProvider = createNewUser();
     }
 
     return c.json(200, {
