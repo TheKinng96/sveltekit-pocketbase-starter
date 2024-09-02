@@ -5,3 +5,7 @@
 </script>
 
 <h1>DASHBOARD</h1>
+
+<div>
+	Welcome, {data.user.username}!
+</div>

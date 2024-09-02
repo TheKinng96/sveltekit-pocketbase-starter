@@ -6,13 +6,18 @@
 	import { Toaster } from '$lib/components/ui/sonner'
 	import { AppNavbar } from '$lib/components/customUi/navbar'
 	import type { PageData } from './$types'
+	import { setUser } from '@/stores/user'
 
 	export let data: PageData
+
+	$: if (data.user) {
+		setUser(data.user)
+	}
 </script>
 
 <ParaglideJS {i18n}>
 	<Toaster richColors />
-	<AppNavbar {data} />
+	<AppNavbar />
 
 	<slot />
 </ParaglideJS>

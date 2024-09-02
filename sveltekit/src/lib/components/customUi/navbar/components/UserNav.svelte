@@ -2,10 +2,11 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js'
 	import * as Avatar from '$lib/components/ui/avatar/index.js'
 	import { Button } from '$lib/components/ui/button/index.js'
-	import type { AuthSystemFields } from '$lib/types/pocketbase-types'
-	import { invalidateAll } from '$app/navigation'
+	import type { UsersResponse } from '$lib/types/pocketbase-types'
+	import { goto, invalidateAll } from '$app/navigation'
+	import { setUser } from '@/stores/user'
 
-	export let user: AuthSystemFields
+	export let user: UsersResponse
 
 	const userNameAbbr = () => {
 		const username = user.username.split('@')[0]
@@ -22,6 +23,8 @@
 
 		if (response.status === 200) {
 			invalidateAll()
+			setUser(null)
+			goto('/')
 		}
 	}
 </script>

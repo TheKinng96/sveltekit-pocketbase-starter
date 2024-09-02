@@ -75,6 +75,17 @@ export class ColormeAuthenticatedRequest extends ColormeRequest {
 		})
 
 		const { shop } = (await response.json()) as ShopResponse
+
+		if (!shop.id)
+			return {
+				id: '',
+				name: '',
+				email: '',
+				shopMail: '',
+				url: '',
+				shopLogoUrl: '',
+			}
+
 		const { id, name1, user_mail, shop_mail_1, url, shop_logo_url } = shop
 
 		return {

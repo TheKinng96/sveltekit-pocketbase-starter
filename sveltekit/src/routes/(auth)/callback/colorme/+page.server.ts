@@ -38,9 +38,12 @@ export const load: PageServerLoad = async function ({ url, locals }) {
 	)
 
 	if (!authProvider) {
-		throw error(420, 'User creation failed')
+		error(420, 'User creation failed')
 	}
 
-	await locals.pb.collection('users').authWithPassword(colormeShopData.email, password)
-	redirect(303, '/dashboard')
+	const loginResponse = await locals.pb
+		.collection('users')
+		.authWithPassword(colormeShopData.email, password)
+
+	return { success: loginResponse.token?.length > 0, user: loginResponse.record }
 }
