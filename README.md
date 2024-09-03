@@ -1,8 +1,71 @@
-# Docker-Powered SvelteKit & PocketBase Starter Template
+# Docker-Powered SvelteKit & PocketBase Starter Template (Colorme version)
 
 Welcome to your new favorite starter template! This project sets up SvelteKit and PocketBase with Docker, providing a robust foundation for your next app. If you find this template useful, consider contributing to make it even better!
 
 If you’d like to [buy me a coffee](https://buymeacoffee.com/fengyuanyaE), I’d greatly appreciate it!
+
+## About Colorme
+
+This branch includes the authentication and authorization setup for integrating with Colorme, a leading Japanese e-commerce platform similar to Shopify. By handling these essential components, you can streamline your development process and focus on implementing your business logic without the burden of managing user authentication.
+
+For more details on Colorme, visit their [developer documentation](https://developer.shop-pro.jp/).
+
+### What's New
+
+#### Pocketbase Integration
+
+- **Default Collections:**
+
+  1. **Users**
+     - Default collection created by Pocketbase.
+     - Used for custom login (see Reference 1).
+  2. **AuthProviders**
+     - Designed for multi-platform authentication.
+     ```json
+     {
+       "provider": "colorme",
+       "providerId": "test", // The ID of the user on the provider
+       "accessToken": "test"
+     }
+     ```
+  3. **Shops**
+     - Stores user's shop-related information.
+     ```json
+     {
+       "shopEmail": "test@example.com",
+       "shopLogoUrl": "https://example.com",
+       "url": "https://example.com"
+     }
+     ```
+
+- **`pb_hooks/colorme.pb.js`**
+  - Contains a custom route `/api/colorme/auth` which checks the sign-in/sign-up user existence.
+  - Creates a new record if it doesn't exist:
+    - Creation includes user, authProvider, and shop records.
+  - Returns the authProvider instance in all cases except credentials error.
+  - The endpoint is currently called in `sveltekit/src/routes/(auth)/callback/colorme/+page.server.ts`.
+  - This endpoint does not log in the user automatically; login happens in the server file mentioned above (see Reference 2).
+
+**References:**
+
+1. **ColorMe platform isn't a supported OAuth provider on Pocketbase:** A workaround is to use ColorMe auth to get the login/sign-up user credentials and log in with a custom password (see Reference 2) on our side.
+
+2. **Login workaround:** In the `.env` file, there is a `PASSWORD_SECRET` variable in `sveltekit` which will be mixed with part of the user's shop credentials to generate a string and further encrypt it into a random strong password. If the Pocketbase server returns an authProvider instance, the app will be authenticated.
+
+#### Sveltekit Integration
+
+- **ColorMe login/signup buttons** are added to both the login and signup pages.
+
+- **`sveltekit/src/lib/server/Colorme.api.ts`:**
+
+  - A helper class for interacting with Colorme.
+  - To set up the helper class properly, you will need to get the `COLORME_CLIENT`, `COLORME_CLIENT_SECRET`, and `COLORME_REDIRECT_URL` through [ColorMe](https://developer.shop-pro.jp) setup.
+
+- **Auth flow:** `/login > ColorMe > /callback/colorme`
+
+  - Since ColorMe only allows HTTPS requests, during development, you will need to expose your local environment, e.g., using ngrok.
+
+- **The install and uninstall for ColorMe** is set in the `routes/api` folder.
 
 ## Getting Started
 
